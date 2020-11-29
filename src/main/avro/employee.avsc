@@ -12,7 +12,7 @@
                    "type" : "record",
                    "name" : "Department",
                    "fields" : [
-                       {"name": "id", "type": "string"},
+                       {"name": "id", "type": "int"},
                        {"name": "name", "type": "string"}
                    ]
                }
