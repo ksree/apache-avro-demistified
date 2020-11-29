@@ -1,0 +1,21 @@
+{    "type": "record",
+     "namespace": "com.ksr.avro",
+     "name": "Employee",
+     "fields": [
+       { "name": "id", "type": "int" },
+       { "name": "first", "type": "string" },
+       { "name": "last", "type": "string" },
+       { "name": "alias", "type": ["string", "null"]},
+       { "name": "age", "type": ["int", "null"]},
+       { "name": "department",
+         "type": {
+                   "type" : "record",
+                   "name" : "Department",
+                   "fields" : [
+                       {"name": "id", "type": "string"},
+                       {"name": "name", "type": "string"}
+                   ]
+               }
+       }
+     ]
+}
