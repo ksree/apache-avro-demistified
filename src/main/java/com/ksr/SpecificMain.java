@@ -17,7 +17,7 @@ import org.apache.avro.specific.SpecificDatumWriter;
 import java.io.File;
 import java.io.IOException;
 
-public class Main {
+public class SpecificMain {
     public static void main(String[] args) throws IOException {
 
         //Serializing and deserializing with code gen
@@ -61,44 +61,6 @@ public class Main {
         while (dataFileReader.hasNext()) {
             emp = dataFileReader.next(emp);
             System.out.println(emp);
-        }
-        //Serializing and deserializing without code generation. Using Schema parsers
-        Schema schema = new Schema.Parser().parse(employeeData);
-        GenericRecord empl1 = new GenericData.Record(schema);
-        empl1.put("id", 1);
-        empl1.put("first", "Nikhil");
-        empl1.put("last", "Chinnappa");
-        empl1.put("department", dept);
-
-        GenericRecord empl2 = new GenericData.Record(schema);
-        empl2.put("id", 2);
-        empl2.put("first", "Rick");
-        empl2.put("last", "Ross");
-        empl2.put("department", dept);
-
-        GenericRecord empl3 = new GenericData.Record(schema);
-        empl3.put("id", 3);
-        empl3.put("first", "Sunil");
-        empl3.put("last", "Gav");
-        empl3.put("department", dept);
-
-        File employeeDataNonGen = new File("target/generated-sources/employee_nongen.avro");
-        //Serialize
-        DatumWriter<GenericRecord> datumWriter = new GenericDatumWriter<GenericRecord>(schema);
-        DataFileWriter<GenericRecord> dataFileWriter1 = new DataFileWriter<GenericRecord>(datumWriter);
-        dataFileWriter1.create(schema, employeeDataNonGen);
-        dataFileWriter1.append(empl1);
-        dataFileWriter1.append(empl2);
-        dataFileWriter1.append(empl3);
-        dataFileWriter1.close();
-
-        // Deserialize employees from disk
-        DatumReader<GenericRecord> datumReader = new GenericDatumReader<GenericRecord>(schema);
-        DataFileReader<GenericRecord> dataFileReader1 = new DataFileReader<GenericRecord>(employeeDataNonGen, datumReader);
-        GenericRecord emp_1 = null;
-        while (dataFileReader.hasNext()) {
-            emp_1 = dataFileReader1.next(emp_1);
-            System.out.println(emp_1);
         }
     }
 }
