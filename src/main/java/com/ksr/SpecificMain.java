@@ -2,13 +2,8 @@ package com.ksr;
 
 import com.ksr.avro.Department;
 import com.ksr.avro.Employee;
-import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
-import org.apache.avro.generic.GenericData;
-import org.apache.avro.generic.GenericDatumReader;
-import org.apache.avro.generic.GenericDatumWriter;
-import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumReader;
@@ -16,6 +11,8 @@ import org.apache.avro.specific.SpecificDatumWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 
 public class SpecificMain {
     public static void main(String[] args) throws IOException {
@@ -62,5 +59,6 @@ public class SpecificMain {
             emp = dataFileReader.next(emp);
             System.out.println(emp);
         }
+
     }
 }

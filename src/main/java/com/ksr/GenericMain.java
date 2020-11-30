@@ -1,7 +1,5 @@
 package com.ksr;
 
-import com.ksr.avro.Department;
-import com.ksr.avro.Employee;
 import org.apache.avro.Schema;
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -11,19 +9,19 @@ import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DatumWriter;
-import org.apache.avro.specific.SpecificDatumReader;
-import org.apache.avro.specific.SpecificDatumWriter;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 
 public class GenericMain {
     public static void main(String[] args) throws IOException {
 
-        File employeeData = new File("src/main/avro/employee.avsc");
+        File employeeSchema = new File("src/main/avro/employee.avsc");
 
         //Serializing and deserializing without code generation. Using Schema parsers
-        Schema schema = new Schema.Parser().parse(employeeData);
+        Schema schema = new Schema.Parser().parse(employeeSchema);
         GenericRecord empl1 = new GenericData.Record(schema);
         //Get the inner object Department
         GenericData.Record dept = new GenericData.Record(schema.getField("department").schema());
@@ -65,5 +63,6 @@ public class GenericMain {
             emp = dataFileReader.next(emp);
             System.out.println(emp);
         }
+
     }
 }
